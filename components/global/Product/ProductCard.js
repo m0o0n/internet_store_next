@@ -14,14 +14,15 @@ export function ProductCard() {
     }
     return (
         <div className={style.product}>
-            <div className={style.product__image}>
-                <Image
-                    src="/assets/dvu_nitka.jpg"
-                    alt="Product picture"
-                    width={350}
-                    height={200}
-                />
-            </div>
+
+            <Image
+                className={style.product__image}
+                src="/assets/dvu_nitka.jpg"
+                alt="Product picture"
+                width={350}
+                height={200}
+            />
+
 
             <h2 className={style.product__name}>Трехнитка петля футер ПЕНЬЕ КОМПАКТ Турция</h2>
 
