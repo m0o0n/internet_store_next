@@ -1,7 +1,15 @@
 import { SubMenuItem } from "./subMenuItem";
 import { IconDropDown } from "../../Icons/IconDropDown";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllSubTypesThunk } from "../../../../store/SubTypes/subTypesAction";
+import { getAllTypesThunk } from "../../../../store/Types/TypesAction";
 export function SubMenu(props) {
+    const dispatch = useDispatch()
+    useEffect(()=> {
+        dispatch(getAllSubTypesThunk())
+        dispatch(getAllTypesThunk())
+    }, [])
     const trikotazh =
         [
             "Неопрен",
@@ -80,6 +88,8 @@ export function SubMenu(props) {
                 title="Прочее"
                 links={other}
             />
+
+            
         </ul>
     )
 }

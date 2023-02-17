@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import { MainLayout } from '../components/global/MainLayout'
 import { ProductCard } from '../components/global/Product/ProductCard'
 import { ProductsGrid } from '../components/global/Product/ProductsGrid'

@@ -3,6 +3,7 @@ const {SubType} = require('../models/models')
 class subTypeController {
     async create(req, res) {
         const {name} = req.body
+        console.log(name)
         const subtype = await SubType.create({name})
         return res.json(subtype)
     }

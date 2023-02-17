@@ -33,6 +33,11 @@ const ProductInfo = sequelize.define('product_info', {
     description: {type: DataTypes.STRING, allowNull: false},
 })
 
+const ProductImages = sequelize.define('product_images', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    img: {type: DataTypes.STRING, allowNull: false}, 
+})
+
 const TypeBrand = sequelize.define('type_brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
@@ -51,6 +56,9 @@ Product.belongsTo(BrandCountry)
 
 Product.hasMany(ProductInfo, {as: 'info'})
 ProductInfo.belongsTo(Product)
+
+Product.hasMany(ProductImages, {as: 'images'})
+ProductImages.belongsTo(Product)
 
 Type.belongsToMany(BrandCountry, {through: TypeBrand})
 BrandCountry.belongsToMany(Type, {through: TypeBrand})
