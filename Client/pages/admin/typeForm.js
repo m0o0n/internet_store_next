@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { createTypeThunk } from "../../store/Types/TypesAction";
 import { useDispatch, useSelector } from "react-redux";
+import style from './admin.module.scss';
+
 export function TypeForm() {
     const dispatch = useDispatch()
     const subTypes = useSelector(state => state.SubTypes)
@@ -16,8 +18,8 @@ export function TypeForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmitType)}>
-            <lable>Выберите категорию для типа</lable>
+        <form className={style.type} onSubmit={handleSubmit(onSubmitType)}>
+            <label>Выберите категорию для типа</label>
             <select
                 {
                 ...register('subTypeId', { required: true, pattern: /\d{1,}/ })
@@ -28,7 +30,7 @@ export function TypeForm() {
                     <option key={subtype.id} value={subtype.id}>{subtype.name}</option>
                 ))}
             </select>
-            <lable>Введите название типа для категории</lable>
+            <label>Введите название типа для категории</label>
             <input type="text" {...register('name', { required: true })} />
             <input type="submit" />
         </form>

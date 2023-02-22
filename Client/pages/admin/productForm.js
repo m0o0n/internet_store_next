@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useDropzone } from 'react-dropzone';
 import Dropzone from 'react-dropzone'
 import React, { useCallback, useEffect, useState } from 'react'
+import style from './admin.module.scss';
 
 export const ProductFrom = () => {
     const [file, setFile] = useState(null)
@@ -15,7 +16,7 @@ export const ProductFrom = () => {
         setFile(acceptedFiles[0])
     }, [acceptedFiles])
     return (
-        <form onSubmit={handleSubmit(onSubmitProduct)}>
+        <form className={style.product} onSubmit={handleSubmit(onSubmitProduct)}>
             <div {...getRootProps()}>
                 <input type="file" {...register('file', { required: true })}  {...getInputProps()} />
                 {
@@ -43,9 +44,9 @@ export const ProductFrom = () => {
 const ImagePreview = (props) => {
     console.log(props)
     return (
-        <div>
+        <div className={style.image_preview}>
             <img src={URL.createObjectURL(props.file)} />
-            <button style={{ margin: '50px 0 50px 0', }} onClick={() => props.clear()}>Clear</button>
+            <button onClick={() => props.clear()}>Clear</button>
         </div>
     )
 }

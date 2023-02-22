@@ -7,6 +7,7 @@ import { createTypeThunk } from "../../store/Types/TypesAction";
 import { ProductFrom } from "./productForm";
 import { SubTypeForm } from "./subTypeForm";
 import { TypeForm } from "./typeForm";
+import style from './admin.module.scss'
 
 export default function Admin() {
     useEffect(() => {
@@ -16,22 +17,21 @@ export default function Admin() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch()
     const subTypes = useSelector(state => state.SubTypes)
-    
+
     const onSubmitType = (data) => {
         dispatch(createTypeThunk({ name: data.name, subTypeId: data.subTypeId }))
     };
     return (
         <MainLayout>
-            <div>admin page</div>
-            
-            <SubTypeForm />
+            <div className={style.admin}>
 
-            <TypeForm />
+                <SubTypeForm />
 
-            <br />
+                <TypeForm />
 
-            <ProductFrom />
-            
+                <ProductFrom />
+
+            </div>
         </MainLayout>
     )
 }
