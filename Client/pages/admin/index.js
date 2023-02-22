@@ -5,6 +5,8 @@ import { createSubTypeThunk, getAllSubTypesThunk } from "../../store/SubTypes/su
 import { useEffect } from "react";
 import { createTypeThunk } from "../../store/Types/TypesAction";
 import { ProductFrom } from "./productForm";
+import { SubTypeForm } from "./subTypeForm";
+import { TypeForm } from "./typeForm";
 
 export default function Admin() {
     useEffect(() => {
@@ -14,38 +16,17 @@ export default function Admin() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch()
     const subTypes = useSelector(state => state.SubTypes)
-    const onSubmitSubType = (data) => {
-        dispatch(createSubTypeThunk(data))
-
-    };
+    
     const onSubmitType = (data) => {
         dispatch(createTypeThunk({ name: data.name, subTypeId: data.subTypeId }))
     };
     return (
         <MainLayout>
             <div>admin page</div>
-            <form onSubmit={handleSubmit(onSubmitSubType)}>
-                <label>Введите имя категории</label>
-                <input type="text" {...register('name', { required: true })} />
-                <input type="submit" />
-            </form>
+            
+            <SubTypeForm />
 
-            <form onSubmit={handleSubmit(onSubmitType)}>
-                <lable>Выберите категорию для типа</lable>
-                <select
-                    {
-                    ...register('subTypeId', { required: true, pattern: /\d{1,}/ })
-                    }
-                >
-                    <option value={null} selected> Please Select </option>
-                    {subTypes.subtypes.map(subtype => (
-                        <option key={subtype.id} value={subtype.id}>{subtype.name}</option>
-                    ))}
-                </select>
-                <lable>Введите название типа для категории</lable>
-                <input type="text" {...register('name', { required: true })} />
-                <input type="submit" />
-            </form>
+            <TypeForm />
 
             <br />
 

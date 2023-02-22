@@ -6,7 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 export const ProductFrom = () => {
     const [file, setFile] = useState(null)
     const { register, handleSubmit, setValue } = useForm();
-    const onSubmitType = (data) => {
+    const onSubmitProduct = (data) => {
         console.log(data)
     };
     const { getRootProps, getInputProps, acceptedFiles, isDragActive } = useDropzone({ onDrop: files => { setValue("file", files) } })
@@ -15,7 +15,7 @@ export const ProductFrom = () => {
         setFile(acceptedFiles[0])
     }, [acceptedFiles])
     return (
-        <form onSubmit={handleSubmit(onSubmitType)}>
+        <form onSubmit={handleSubmit(onSubmitProduct)}>
             <div {...getRootProps()}>
                 <input type="file" {...register('file', { required: true })}  {...getInputProps()} />
                 {
@@ -29,7 +29,7 @@ export const ProductFrom = () => {
             {
                 file ? <ImagePreview file={file} clear={() => setFile(null)} /> : null
             }
-            <input type="text" {...register('name', { required: true, pattern: /\d{1,}/ })} />
+            <input type="text" {...register('name', { required: true })} />
             <input type="number" {...register('price1', { required: true, pattern: /\d{1,}/ })} />
             <input type="number" {...register('price10', { required: true, pattern: /\d{1,}/ })} />
             <input type="number" {...register('price50', { required: true, pattern: /\d{1,}/ })} />
