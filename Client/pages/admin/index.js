@@ -8,6 +8,7 @@ import { ProductFrom } from "./productForm";
 import { SubTypeForm } from "./subTypeForm";
 import { TypeForm } from "./typeForm";
 import style from './admin.module.scss'
+import { BrandCountryForm } from "./brandCountryForm";
 
 export default function Admin() {
     useEffect(() => {
@@ -28,6 +29,8 @@ export default function Admin() {
                 <SubTypeForm />
 
                 <TypeForm />
+
+                <BrandCountryForm />
 
                 <ProductFrom />
 

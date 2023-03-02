@@ -6,7 +6,7 @@ const { where } = require('sequelize')
 class productController {
     async create(req, res, next) {
         try {
-            const {
+            let {
                 name,
                 brandCountryId,
                 typeId,
@@ -31,7 +31,7 @@ class productController {
             if (info) {
                 info = JSON.parse(info)
                 info.forEach(info => {
-                    ProductInfo.create({ title: info.title, body: info.body, productId: product.id })
+                    ProductInfo.create({ title: info.title, description: info.body, productId: product.id })
                 });
             }
 

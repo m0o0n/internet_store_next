@@ -63,6 +63,15 @@
                 font-weight: 600;
             }
         }
+
+        .info_fields {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            input {
+                width: 48%;
+            }
+        }
     }
     
     

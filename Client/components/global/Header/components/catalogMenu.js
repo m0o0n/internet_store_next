@@ -6,7 +6,7 @@ export const CatalogMenu = () => {
     const [clientWidth, setClientWidth] = useState(0);
     const [mobileWidth, setMobileWidth] = useState(0);
     const [innerWidth, setInnerWidth] = useState(0)
-    const [isShow, setIsShow] = useState(true)
+    const [isShow, setIsShow] = useState(false)
     const handleResize = () => {
         if(window.innerWidth >= 768){
             setClientWidth(document.documentElement.clientWidth);
