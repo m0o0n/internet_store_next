@@ -7,7 +7,6 @@ import style from "./Product.module.scss";
 import { ProductCard } from "./ProductCard";
 
 const ProductsGrid = ({ products }) => {
-  console.log(products);
   return (
     <div className={style.catalog}>
       <div className={style.catalog__filters}></div>
@@ -15,6 +14,7 @@ const ProductsGrid = ({ products }) => {
         {products.products.map((product) => {
           return (
             <ProductCard
+              key={product.id}
               img={product.img}
               name={product.name}
               price1={product.price1}

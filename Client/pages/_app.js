@@ -14,7 +14,7 @@ const MyApp = ({ Component, pageProps }) => {
 
 MyApp.getInitialProps = wrapper.getInitialPageProps((store) => async () => {
   await store.dispatch(getAllSubTypesThunk());
-  // await store.dispatch(getAllTypesThunk());
-  // await store.dispatch(getAllBrandsCountryThunk());
+  await store.dispatch(getAllTypesThunk());
+  await store.dispatch(getAllBrandsCountryThunk());
 });
 export default wrapper.withRedux(MyApp);
