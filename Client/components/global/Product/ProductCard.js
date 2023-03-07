@@ -1,9 +1,10 @@
 import style from "./Product.module.scss";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export function ProductCard({ img, name, price1, price10, price50 }) {
   const [count, setCount] = useState(1);
+  const [currentCost, setCurrentCost] = useState(null);
   const countRef = useRef(null);
   const increase = () => {
     setCount(count + 1);
@@ -13,6 +14,16 @@ export function ProductCard({ img, name, price1, price10, price50 }) {
       setCount(count - 1);
     }
   };
+
+  useEffect(() => {
+    count >= 10
+      ? setCurrentCost(price10)
+      : count >= 50
+      ? setCurrentCost(price50)
+      : setCurrentCost(price1);
+  }, [count]);
+
+  const costActions = (price1, price10, price50, count) => {};
   return (
     <div className={style.product}>
       <Image
@@ -50,7 +61,7 @@ export function ProductCard({ img, name, price1, price10, price50 }) {
 
       <div className={style.product__actions}>
         <div className={style.product__actions__cost}>
-          <div className={style.current_cost}>185 грн/м</div>
+          <div className={style.current_cost}>{currentCost + " "} грн/м</div>
           <div className={style.cost_actions}>
             <div className={style.input}>
               <input
@@ -71,7 +82,7 @@ export function ProductCard({ img, name, price1, price10, price50 }) {
                 </button>
               </div>
             </div>
-            <div className={style.total_cost}>{185 * count} UAH</div>
+            <div className={style.total_cost}>{currentCost * count} UAH</div>
           </div>
         </div>
         <button className={style.product__actions__button}>Купить</button>
