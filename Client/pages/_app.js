@@ -1,27 +1,20 @@
-import '../styles/globals.scss'
-import { Provider, useSelector } from 'react-redux'
-import store from '../store/redux-store'
-import { useEffect } from 'react'
-import { AuthThunk } from '../store/User/userActions'
+import "../styles/globals.scss";
+import { Provider, useSelector } from "react-redux";
+import { wrapper } from "../store/redux-store";
+import { useEffect } from "react";
+import { AuthThunk } from "../store/User/userActions";
 
-import { getAllSubTypesThunk } from '../store/SubTypes/subTypesAction'
-import { getAllTypesThunk } from '../store/Types/TypesAction'
-import { getAllBrandsCountryThunk } from '../store/BrandCountry/brandCountryActions'
+import { getAllSubTypesThunk } from "../store/SubTypes/subTypesAction";
+import { getAllTypesThunk } from "../store/Types/TypesAction";
+import { getAllBrandsCountryThunk } from "../store/BrandCountry/brandCountryActions";
 
-function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    store.dispatch(AuthThunk())
-    store.dispatch(getAllSubTypesThunk());
-    store.dispatch(getAllTypesThunk());
-    store.dispatch(getAllBrandsCountryThunk());
-  }, [])
+const MyApp = ({ Component, pageProps }) => {
+  return <Component {...pageProps} />;
+};
 
-  return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
-  )
-}
-
-
-export default MyApp
+MyApp.getInitialProps = wrapper.getInitialPageProps((store) => async () => {
+  await store.dispatch(getAllSubTypesThunk());
+  // await store.dispatch(getAllTypesThunk());
+  // await store.dispatch(getAllBrandsCountryThunk());
+});
+export default wrapper.withRedux(MyApp);
