@@ -6,7 +6,7 @@
   //   max-width: 90%;
   @media (min-width: 668px) {
     margin: 0 1% 20px 1%;
-    flex: 1 0 48%;
+    flex: 0 0 48%;
   }
 
   @media (min-width: 1024px) {
@@ -168,6 +168,7 @@
   &__grid {
     position: relative;
     display: flex;
+    margin-top: 15px;
     justify-content: flex-start;
     flex-wrap: wrap;
   }

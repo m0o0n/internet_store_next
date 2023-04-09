@@ -17,10 +17,7 @@ const brandsCountrySlice = createSlice({
   reducers: {},
   extraReducers: {
     [HYDRATE](state, { payload }) {
-      state.brandsCountry = [
-        ...state.brandsCountry,
-        ...payload.BrandsCountry.brandsCountry,
-      ];
+      state.brandsCountry = [...payload.BrandsCountry.brandsCountry];
     },
     [getAllBrandsCountryThunk.pending](state, _) {
       state.isLoading = true;

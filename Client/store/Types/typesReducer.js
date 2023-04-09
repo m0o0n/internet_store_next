@@ -14,7 +14,7 @@ const typesSlice = createSlice({
   reducers: {},
   extraReducers: {
     [HYDRATE](state, { payload }) {
-      state.types = [...state.types, ...payload.Types.types];
+      state.types = [...payload.Types.types];
     },
     [getAllTypesThunk.pending](state, _) {
       state.isLoading = true;

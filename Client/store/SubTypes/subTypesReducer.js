@@ -13,7 +13,7 @@ const subTypesSlice = createSlice({
   reducers: {},
   extraReducers: {
     [HYDRATE](state, { payload }) {
-      state.subtypes = [...state.subtypes, ...payload.SubTypes.subtypes];
+      state.subtypes = [...payload.SubTypes.subtypes];
     },
     [getAllSubTypesThunk.pending](state, _) {
       state.isLoading = true;
