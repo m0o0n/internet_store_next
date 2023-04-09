@@ -5,8 +5,7 @@ export const getAllProductsThunk = createAsyncThunk(
   "product/getAll",
   async (thunkAPI) => {
     try {
-      console.log("hi");
-      const response = await getAll();
+      const response = await getAll(thunkAPI);
       return response;
     } catch (e) {
       return thunkAPI.rejectWithValue(
