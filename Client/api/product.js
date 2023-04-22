@@ -5,6 +5,11 @@ export const create = async (FromData) => {
     return data
 }
 
+export const getOne = async ({ id }) => {
+    const { data } = await $HostIstance.get(`product/${id}`);
+    return data;
+}
+
 export const getAll = async (params) => {
     const url = params
         ? `product?brandCountryId=${params.brandCountryId || ''}&typeId=${params.typeId || ''}`

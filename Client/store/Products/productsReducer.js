@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const ProductsSlice = createSlice({
-  name: "product",
+  name: "products",
   initialState,
   reducers: {},
   extraReducers: {
@@ -19,7 +19,6 @@ const ProductsSlice = createSlice({
       state.isLoading = true;
     },
     [getAllProductsThunk.fulfilled](state, { payload }) {
-      //   console.log("getAllProductsThunk success", payload, state);
       state.products = [...payload.rows];
       state.isLoading = false;
     },

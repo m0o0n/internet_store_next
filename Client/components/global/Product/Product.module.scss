@@ -39,6 +39,9 @@
     font-style: italic;
     margin: 10px 0;
     letter-spacing: 0.03em;
+    a {
+      color:  black;
+    }
   }
 
   &__properties {
@@ -80,7 +83,7 @@
 
     .current_cost {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       font-weight: 600;
       font-size: 20px;
@@ -88,8 +91,10 @@
     .cost_actions {
       position: relative;
       display: flex;
+      width: auto;
       .input {
         display: flex;
+        width: auto;
         input {
           text-align: center;
           width: 45px;
@@ -116,6 +121,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        white-space: nowrap;
         font-size: 14px;
         padding: 0 5px;
         margin-left: 1px;

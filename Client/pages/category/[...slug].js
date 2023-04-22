@@ -3,7 +3,6 @@ import ProductsGrid from "../../components/global/Product/ProductsGrid";
 import { MainLayout } from "../../components/global/MainLayout";
 import { getAllProductsThunk } from "../../store/Products/productsActions";
 const Category = (props) => {
-  console.log(props)
   return (
     <MainLayout>
       hi

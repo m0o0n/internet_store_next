@@ -1,8 +1,10 @@
 import style from "./Product.module.scss";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
+import { ProductActions } from './ProductActions'
+import Link from "next/link";
 
-export function ProductCard({ img, name, price1, price10, price50 }) {
+export function ProductCard({ id, img, name, price1, price10, price50 }) {
   const [count, setCount] = useState(1);
   const [currentCost, setCurrentCost] = useState(null);
   const countRef = useRef(null);
@@ -19,11 +21,11 @@ export function ProductCard({ img, name, price1, price10, price50 }) {
     count >= 10
       ? setCurrentCost(price10)
       : count >= 50
-      ? setCurrentCost(price50)
-      : setCurrentCost(price1);
+        ? setCurrentCost(price50)
+        : setCurrentCost(price1);
   }, [count]);
 
-  const costActions = (price1, price10, price50, count) => {};
+  const costActions = (price1, price10, price50, count) => { };
   return (
     <div className={style.product}>
       <Image
@@ -34,20 +36,10 @@ export function ProductCard({ img, name, price1, price10, price50 }) {
         height={200}
       />
 
-      {/* <h2 className={style.product__name}>
-        Трехнитка петля футер ПЕНЬЕ КОМПАКТ Турция
-      </h2> */}
-
-      <h2 className={style.product__name}>{name}</h2>
+      <h2 className={style.product__name}><Link href='/product/[...id]' as={`/product/${id}`}>{name}</Link></h2>
 
       <div className={style.product__properties}>
-        {/* <div>
-          <div className={style.product__properties__title}>Состав:</div>
-          <div className={style.product__properties__body}>
-            <span>Хлопок: 85%</span>
-            <span>Эластан: 15%</span>
-          </div>
-        </div> */}
+
 
         <div>
           <div className={style.product__properties__title}>Цена:</div>
@@ -59,7 +51,7 @@ export function ProductCard({ img, name, price1, price10, price50 }) {
         </div>
       </div>
 
-      <div className={style.product__actions}>
+      {/* <div className={style.product__actions}>
         <div className={style.product__actions__cost}>
           <div className={style.current_cost}>{currentCost + " "} грн/м</div>
           <div className={style.cost_actions}>
@@ -86,7 +78,9 @@ export function ProductCard({ img, name, price1, price10, price50 }) {
           </div>
         </div>
         <button className={style.product__actions__button}>Купить</button>
-      </div>
+      </div> */}
+
+      <ProductActions price1={price1} price10={price10} price50={price50} />
     </div>
   );
 }

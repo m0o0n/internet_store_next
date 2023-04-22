@@ -6,10 +6,12 @@ import productsReducer from "./Products/productsReducer";
 import subTypesReducer from "./SubTypes/subTypesReducer";
 import typesReducer from "./Types/typesReducer";
 import userSlice from "./User/userReducer";
+import productReducer from "./Product/productReducer";
 
 const reducers = combineReducers({
   User: userSlice,
   Products: productsReducer,
+  Product: productReducer,
   SubTypes: subTypesReducer,
   Types: typesReducer,
   BrandsCountry: brandCountryReducer,

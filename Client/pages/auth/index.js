@@ -5,22 +5,23 @@ import Image from 'next/image'
 import { LoginThunk } from "../../store/User/userActions";
 import { useRouter } from 'next/router'
 import { useEffect } from "react";
+import { wrapper } from "../../store/redux-store";
 
-export default function Auth() {
+const Auth = ({ loginHandler }) => {
     const dispatch = useDispatch()
-    const user = useSelector(state => state.User)  
+    const user = useSelector(state => state.User.user)
     const router = useRouter()
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         dispatch(LoginThunk(data))
     }
 
-    useEffect(()=> {
-        if(user.id){
+    useEffect(() => {
+        if (user.id) {
             router.push('/')
         }
     }, [user])
-    
+
     return (
         <div className="auth">
             <div className="auth__logo">
@@ -39,3 +40,16 @@ export default function Auth() {
         </div>
     )
 }
+
+// export const getServerSideProps = wrapper.getServerSideProps(({ getState, dispatch }) =>
+//     async () => {
+
+//         return {
+//             props: {
+//                 loginHandler: AuthCallBack
+//             }
+//         }
+//     }
+// )
+
+export default Auth

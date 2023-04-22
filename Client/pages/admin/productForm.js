@@ -83,7 +83,6 @@ export const ProductFrom = () => {
         info,
       })
     );
-    console.log(data, img[0]);
     reset();
     setFile(null);
     setDisableStep([true, ""]);
@@ -97,7 +96,6 @@ export const ProductFrom = () => {
     });
 
   useEffect(() => {
-    console.log(acceptedFiles);
     setFile(acceptedFiles[0]);
   }, [acceptedFiles]);
 
@@ -214,7 +212,6 @@ export const ProductFrom = () => {
 };
 
 const ImagePreview = (props) => {
-  console.log(props);
   return (
     <div className={style.image_preview}>
       <img src={URL.createObjectURL(props.file)} />

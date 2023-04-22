@@ -9,6 +9,11 @@ ul{
   padding: 0;
 }
 
+a{
+  color: white;
+  text-decoration: none
+}
+
 @import './aplication/header';
 .main {
   position: relative;

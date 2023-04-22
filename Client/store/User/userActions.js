@@ -5,7 +5,7 @@ export const LoginThunk = createAsyncThunk(
     'user/login',
     async (data, thunkAPI) => {
         try {
-            const {email, password} = data
+            const { email, password } = data
             const response = await login(email, password)
             return response
         } catch (e) {
@@ -21,7 +21,6 @@ export const AuthThunk = createAsyncThunk(
     async (thunkAPI) => {
         try {
             const response = await check()
-            console.log(response)
             return response
         } catch (e) {
             return thunkAPI.rejectWithValue(

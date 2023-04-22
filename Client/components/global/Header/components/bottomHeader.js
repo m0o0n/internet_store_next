@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthThunk } from "../../../../store/User/userActions";
 import Link from "next/link";
 
-export function BottomHeader() {
-  const user = useSelector((state) => state.User);
+
+export const BottomHeader = () => {
+  const user = useSelector((state) => state.User.user);
   const dispatch = useDispatch();
   const logOut = () => {
     localStorage.removeItem("token");
@@ -56,3 +57,4 @@ export function BottomHeader() {
     </div>
   );
 }
+

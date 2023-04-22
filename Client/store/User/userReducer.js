@@ -1,11 +1,13 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { AuthThunk, LoginThunk } from './userActions'
-
+import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
-    id: null,
-    email: null,
-    role: null,
+    user: {
+        id: null,
+        email: null,
+        role: null,
+    },
     isLoading: false,
     error: ''
 }
@@ -15,39 +17,46 @@ const userSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [LoginThunk.pending](state, _){
+        // [HYDRATE](state, { payload }) {
+        //     console.log(state)
+        //     state.user.id = payload.User.user.id;
+        //     state.user.email = payload.User.user.email;
+        //     state.user.role = payload.User.user.role;
+
+        // },
+        [LoginThunk.pending](state, _) {
             state.isLoading = true
         },
-        [LoginThunk.fulfilled](state, {payload}){
+        [LoginThunk.fulfilled](state, { payload }) {
             state.isLoading = false;
-            state.id = payload.id;
-            state.email = payload.email;
-            state.role = payload.role;
+            state.user.id = payload.id;
+            state.user.email = payload.email;
+            state.user.role = payload.role;
             state.error = ''
         },
-        [LoginThunk.rejected](state, {payload}){
+        [LoginThunk.rejected](state, { payload }) {
             state.isLoading = false;
             state.error = payload;
         },
 
-        [AuthThunk.pending](state, _){
+        [AuthThunk.pending](state, _) {
             state.isLoading = true
         },
-        [AuthThunk.fulfilled](state, {payload}){
+        [AuthThunk.fulfilled](state, { payload }) {
             state.isLoading = false;
-            state.id = payload.id;
-            state.email = payload.email;
-            state.role = payload.role;
+            state.user.id = payload.id;
+            state.user.email = payload.email;
+            state.user.role = payload.role;
             state.error = ''
         },
-        [AuthThunk.rejected](state, {payload}){
-            state.id = null;
-            state.email = null;
-            state.role = null;
+        [AuthThunk.rejected](state, { payload }) {
+            state.user.id = null;
+            state.user.email = null;
+            state.user.role = null;
             state.isLoading = false;
             state.error = '';
         },
-        
+
     }
 })
 

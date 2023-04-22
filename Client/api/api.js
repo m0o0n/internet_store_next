@@ -8,9 +8,9 @@ export const $AuthHostIstance = axios.create({
     baseURL: 'http://localhost:5000/api/'
 })
 
-const authInterceptor = config =>{
+const authInterceptor = config => {
     config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
     return config;
-  };
-  
-  $AuthHostIstance.interceptors.request.use(authInterceptor);
+};
+
+$AuthHostIstance.interceptors.request.use(authInterceptor);
