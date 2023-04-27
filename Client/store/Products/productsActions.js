@@ -27,6 +27,7 @@ export const createProductsThunk = createAsyncThunk(
         typeId,
         brandCountryId,
         img,
+        images,
         info,
       } = thunkAPI;
       const fd = new FormData();
@@ -37,6 +38,12 @@ export const createProductsThunk = createAsyncThunk(
       fd.append("typeId", Number(typeId));
       fd.append("brandCountryId", Number(brandCountryId));
       fd.append("img", img);
+      if (images.length) {
+        images.forEach(image => {
+          fd.append("images", image);
+        });
+      }
+
       fd.append("info", JSON.stringify(info));
       const response = await create(fd);
       return response;

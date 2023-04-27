@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 const path = require('path')
-const { Product, ProductInfo } = require('../models/models')
+const { Product, ProductInfo, ProductImages } = require('../models/models')
 const ApiError = require('../error/ApiError')
 const { where } = require('sequelize')
 class productController {
@@ -15,7 +15,8 @@ class productController {
                 price50,
                 info
             } = req.body
-            const { img } = req.files
+            const { img, images } = req.files
+            console.log(images)
             let fileName = uuid.v4() + '.jpg'
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
             const product = await Product.create({
@@ -33,6 +34,14 @@ class productController {
                 info.forEach(info => {
                     ProductInfo.create({ title: info.title, description: info.body, productId: product.id })
                 });
+            }
+
+            if (images) {
+                images.forEach(async (image) => {
+                    let imgName = uuid.v4() + '.jpg'
+                    image.mv(path.resolve(__dirname, '..', 'static', imgName))
+                    await ProductImages.create({ img: imgName, productId: product.id })
+                })
             }
 
             return res.json(product)

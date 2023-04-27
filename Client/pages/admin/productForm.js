@@ -1,9 +1,10 @@
 import { useForm, useFieldArray } from "react-hook-form";
-import { useDropzone } from "react-dropzone";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./admin.module.scss";
 import { createProductsThunk } from "../../store/Products/productsActions";
+import { MainPhotoDropZone } from "./mainPhotoDropZone";
+import { AllPhotsDropZone } from "./allPhotosDropZone";
 
 export const ProductFrom = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export const ProductFrom = () => {
     defaultValues: {
       info: [],
       img: [null],
+      images: [null],
       typeId: "Please Select",
       brandCountryId: "Please Select",
       name: "",
@@ -27,6 +29,8 @@ export const ProductFrom = () => {
   });
 
   const [file, setFile] = useState(null);
+
+  const [files, setFiles] = useState([]);
 
   const [subTypeStepID, setSubTypeStepID] = useState(null);
 
@@ -69,8 +73,10 @@ export const ProductFrom = () => {
       typeId,
       brandCountryId,
       img,
+      images,
       info,
     } = data;
+    console.log(data)
     dispatch(
       createProductsThunk({
         name,
@@ -80,6 +86,7 @@ export const ProductFrom = () => {
         typeId,
         brandCountryId,
         img: img[0],
+        images: images,
         info,
       })
     );
@@ -88,32 +95,27 @@ export const ProductFrom = () => {
     setDisableStep([true, ""]);
   };
 
-  const { getRootProps, getInputProps, acceptedFiles, isDragActive } =
-    useDropzone({
-      onDrop: (files) => {
-        setValue("img", files);
-      },
-    });
-
-  useEffect(() => {
-    setFile(acceptedFiles[0]);
-  }, [acceptedFiles]);
 
   return (
     <form className={style.product} onSubmit={handleSubmit(onSubmitProduct)}>
-      <div {...getRootProps()}>
-        <input
-          type="file"
-          {...register("img", { required: true })}
-          {...getInputProps()}
+
+      <div className={style.product__avatar}>
+        <MainPhotoDropZone
+          setValue={setValue}
+          register={() => register("img", { required: true })}
+          file={file}
+          setFile={setFile}
         />
-        {file ? null : isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        )}
       </div>
-      {file ? <ImagePreview file={file} clear={() => setFile(null)} /> : null}
+
+      <div className={style.product__galery}>
+        <AllPhotsDropZone
+          setValue={setValue}
+          register={() => register("images", { required: true })}
+          files={files}
+          setFiles={setFiles}
+        />
+      </div>
 
       {!subTypeStepID ? (
         <div>
@@ -208,14 +210,5 @@ export const ProductFrom = () => {
       })}
       <input type="submit" disabled={!subTypeStepID} />
     </form>
-  );
-};
-
-const ImagePreview = (props) => {
-  return (
-    <div className={style.image_preview}>
-      <img src={URL.createObjectURL(props.file)} />
-      <button onClick={() => props.clear()}>Clear</button>
-    </div>
   );
 };
