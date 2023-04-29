@@ -175,18 +175,25 @@ export const ProductFrom = () => {
         ))}
       </select>
 
-      <input type="text" {...register("name", { required: true })} />
+      <input
+        type="text"
+        {...register("name", { required: true })}
+        placeholder="Введите название товара"
+      />
       <input
         type="number"
         {...register("price1", { required: true, pattern: /\d{1,}/ })}
+        placeholder="Введите цену за 1 метр товара"
       />
       <input
         type="number"
         {...register("price10", { required: true, pattern: /\d{1,}/ })}
+        placeholder="Введите цену за 10 метров товара"
       />
       <input
         type="number"
         {...register("price50", { required: true, pattern: /\d{1,}/ })}
+        placeholder="Введите цену за 50 метров товара"
       />
       <button className={style.margin}
         onClick={() => {
