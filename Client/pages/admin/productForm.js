@@ -5,6 +5,7 @@ import style from "./admin.module.scss";
 import { createProductsThunk } from "../../store/Products/productsActions";
 import { MainPhotoDropZone } from "./mainPhotoDropZone";
 import { AllPhotsDropZone } from "./allPhotosDropZone";
+import { IconTrash } from "../../components/global/Icons/IconTrash";
 
 export const ProductFrom = () => {
   const dispatch = useDispatch();
@@ -117,8 +118,9 @@ export const ProductFrom = () => {
         />
       </div>
 
+
       {!subTypeStepID ? (
-        <div>
+        <div className={style.product__categories_steps}>
           <label>Выберите раздел для товара</label>
           <select onChange={(e) => choseCategory(e)}>
             <option value={null} selected>
@@ -134,11 +136,11 @@ export const ProductFrom = () => {
             disabled={disableStep[0]}
             onClick={(e) => nextStep(e, disableStep[1])}
           >
-            Next
+            Next 	&#8594;
           </button>
         </div>
       ) : (
-        <div>
+        <div className={style.product__categories_steps}>
           <label>Выберите категорию для товара</label>
           <select
             {...register("typeId", { required: true, pattern: /\d{1,}/ })}
@@ -186,7 +188,7 @@ export const ProductFrom = () => {
         type="number"
         {...register("price50", { required: true, pattern: /\d{1,}/ })}
       />
-      <button
+      <button className={style.margin}
         onClick={() => {
           append({ title: "", body: "" });
         }}
@@ -195,7 +197,7 @@ export const ProductFrom = () => {
       </button>
       {fields.map((field, i) => {
         return (
-          <div className={style.info_fields}>
+          <div className={style.product__info_fields}>
             <input
               type="text"
               {...register(`info.${i}.title`, { required: true })}
@@ -204,7 +206,7 @@ export const ProductFrom = () => {
               type="text"
               {...register(`info.${i}.body`, { required: true })}
             />
-            <button onClick={() => remove(i)}>Remove</button>
+            <button onClick={() => remove(i)}><IconTrash /></button>
           </div>
         );
       })}
